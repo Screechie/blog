@@ -2,6 +2,19 @@
 	<h1>New Post</h1>
 
 	<%= form_for :post, url: posts_path do |f| %>
+	<!-- Print Validation errors for new posts.
+		 Documented by S.Bourne:04/06/2015 -->
+	<% if @post.errors.any? %>
+		<div id="errors">
+			<!--Error message which is pluralized if more than one error exists -->
+			<h2> <%= pluralize(@post.errors.count, "error") %> prevented this post from saving</h2>
+
+			<!-- List Error messages inside of li tags -->
+			<% @post.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</div>
+	<% end %>
 		
 		<p>
 			<%= f.label :title %><br>
